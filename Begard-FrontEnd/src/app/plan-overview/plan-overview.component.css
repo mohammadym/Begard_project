@@ -1,0 +1,58 @@
+.plan-card {
+  width: auto;
+  height: auto;
+}
+
+.profile-image {
+  background-size: cover;
+}
+
+.mat-card-avatar {
+  height: 50px;
+  width: 50px;
+}
+
+.im {
+  position: absolute;
+  display: block;
+  max-width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto !important;
+}
+
+.location-icon {
+  font-size: 120%;
+  align-items: center;
+  align-content: center;
+  display: flex;
+  justify-content: center;
+  color: rgb(14, 212, 219);
+}
+
+.city {
+  margin-top: 2px;
+  font-size: 90%;
+}
+
+mat-card-subtitle {
+  display: flex;
+}
+
+.im-wrapper {
+  display: flex;
+  width: 100%;
+  position: relative;
+  height: 0;
+  padding: 56.25% 0 0 0;
+  overflow: hidden;
+  background: white;
+}
+
+.date {
+  margin-top: 2px;
+  margin-left: 10px;
+  font-size: 90%;
+}

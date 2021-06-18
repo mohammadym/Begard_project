@@ -1,0 +1,199 @@
+<app-nav-bar style="position: fixed; width: 100%; z-index: 200;top:0;"></app-nav-bar>
+<div class="row" style="padding: 15% 5%; margin: 0;background-size: cover;"
+    [ngStyle]="{'background-image': 'url(' + baseurl +'/media/images/back.jpg' +')'}">
+    <!-- <img src="../../assets/trip.svg" style="position: absolute;right: 10%;top: 10%; width: 30%;"> -->
+</div>
+<div style="display: flex; justify-content: center">
+
+    <mat-card class="pro-info shadow-lg">
+
+        <div class="row" style="margin: 0;padding: 0 2%;">
+            <div class="col-lg-2" style="text-align: center;height: 120px;">
+                <img mat-card-avatar class="shadow-lg" style="transform: scale(4);margin-top: 40px;"
+                    src='{{profileImage}}'>
+            </div>
+            <div class="col-lg-6 " style="padding-left: 30px;">
+                <div class="row user-name" style="height: 70px;">
+                    <h1 style="font-size: 2rem;padding-left: 3%;" class="header user-font">{{username}}</h1>
+                </div>
+                <div class="row header-down">
+                    <div class="col-lg-2 col-4 post-items posts" style="cursor: text;padding-left:0;">
+                        <h2 style="text-align: center;margin-bottom: 0px;" class="smaller">Plans</h2>
+                        <h3 class="post-items-num smaller" style="font-size: 1.2rem;text-align: center;">{{plansCount}}
+                        </h3>
+                    </div>
+                    <div (click)="showFollowers()" class="col-lg-2 col-4 post-items followers" style="padding-left:0;">
+                        <h2 style="text-align: center;margin-bottom: 0px;" class="smaller">Followers</h2>
+                        <h3 class="post-items-num smaller" style="font-size: 1.2rem;text-align: center;">
+                            {{followersCount}}
+                        </h3>
+                    </div>
+                    <div (click)="showFollowings()" class="col-lg-2 col-4 post-items followings"
+                        style="padding-left: 0;margin-left: 30px;">
+                        <h2 style="text-align: center;margin-bottom: 0px;" class="smaller">Followings</h2>
+                        <h3 class="post-items-num smaller" style="font-size: 1.2rem;text-align: center;">
+                            {{followingCount}}</h3>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </mat-card>
+
+</div>
+
+<div class="row" style="margin:0; padding: auto 5%;">
+    <div class="col-lg-3 side-item ">
+        <div class="sidebar">
+            <div class="make-me-sticky">
+
+                <mat-card class="shadow-lg " style="height: auto;border-radius: 10px">
+
+                    <div routerLink="/homepage" class="underline">
+                        <mat-icon style="margin-left: 10px;margin-top: 7px;">home</mat-icon>
+                        <p style="margin-left: 10px;margin-top: 10px;">Home</p>
+                    </div>
+                    <hr class="hr">
+                    <div routerLink='{{proUrl}}' class="underline">
+                        <mat-icon style="margin-left: 10px;margin-top: 7px;">person_outline</mat-icon>
+                        <p style="margin-left: 10px;margin-top: 10px;">Profile</p>
+                    </div>
+                    <hr class="hr">
+                    <div (click)="refresh()" class="underline">
+                        <mat-icon style="margin-left: 10px;margin-top: 7px;">date_range</mat-icon>
+                        <p style="margin-left: 10px;margin-top: 10px;">My plans</p>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div style="display: flex; justify-content: center;">
+    <mat-card class="pro-info shadow-lg">
+        <div style="display:flex;align-items: center;">
+            <div style="display: block;width: 10%; margin-left: 2%;">
+                <img style="width: 100%; border-radius: 50%;" src='{{profileImage}}'>
+            </div>
+
+            <div style="padding-top: 2%; margin-left: 3%;">
+                <div style="font-size: 30px;">
+                    {{username}}
+                </div>
+
+                <div style="display: flex;margin-top: 7%;">
+                    <div>
+                        <div> plans</div>
+                        <div class="number" style="justify-content: center;display: flex;">{{plansCount}}</div>
+                    </div>
+                    <div style="margin-left: 15%;margin-right: 15%;">
+                        <div>followres</div>
+                        <div class="number" style="justify-content: center;display: flex;">{{followersCount}}</div>
+                    </div>
+                    <div>
+                        <div>followings</div>
+                        <div class="number" style="justify-content: center;display: flex;">{{followingCount}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-card>
+</div>
+
+<div style="display:flex; justify-content: start; margin-top: 30px; margin-left: 5%;margin-right: 5%;">
+    <div style="width: 25% ;">
+        <mat-card class="shadow-lg" style="height: auto;border-radius: 10px">
+            <a style="width : 100%;display:flex; justify-content:flex-start;margin-left: 10px;">
+                <mat-icon>date_range</mat-icon>
+                <p class="underline" style="margin-left: 10px;margin-top: 3px;">My plans</p>
+            </a>
+            <a style="width : 100%;display:flex; justify-content:flex-start;margin-left: 10px;" (click)="goToHome()">
+                <mat-icon>home</mat-icon>
+                <p class="underline" style="margin-left: 10px;margin-top: 3px;">Home</p>
+            </a>
+            <a style="width : 100%;display:flex; justify-content:flex-start;margin-left: 10px;" (click)="goToProfile()">
+                <mat-icon>person_outline</mat-icon>
+                <p class="underline" style="margin-left: 10px;margin-top: 3px;">Profile</p>
+            </a>
+        </mat-card>
+    </div> -->
+
+    <div class="col-lg-5 content-item">
+        <p style="width: 100%;text-align: center;font-size: 130%;color:rgb(111, 105, 105)">Plans</p>
+        <hr style="width: 150px;
+        background-color: #3f51b5;">
+        <div class="center-bar" style="display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        grid-gap: 5%;
+        margin-right: -3%;">
+            <div *ngFor="let plan of myPlans">
+                <mat-card class="shadow-lg"
+                    style="width: 100%;height: 100%;padding: 4%; cursor: pointer;border-radius: 10px;">
+                    <div style="display: flex;overflow: hidden;width: 100%;margin-bottom: 3%;">
+                        <mat-icon (click)="goToPlan(plan.id)" style="min-width: 10px;margin: auto;"
+                            class="location-icon">location_on</mat-icon>
+                        <span (click)="goToPlan(plan.id)" #city
+                            style=" align-self: center;width: 38%;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;"
+                            matTooltip="{{plan.destination_city_name}}" matTooltipPosition="above"
+                            class="city">{{plan.destination_city_name}}</span>
+                        <span (click)="goToPlan(plan.id)" class="date"
+                            style="width: 45%;text-overflow: ellipsis;overflow: hidden;white-space: nowrap; text-align: end;align-self: center;"
+                            matTooltip="{{plan.creation_date}}" matTooltipPosition="above">At
+                            {{plan.creation_date}}</span>
+                        <mat-icon
+                            style="width: 6% ;font-size: 105%;justify-content: center;align-items: center;display: flex; padding-top: 0.5%;"
+                            [matMenuTriggerFor]="moreOptions">more_vert</mat-icon>
+                        <mat-menu #moreOptions>
+                            <button (click)="onDelete(plan.id)" style="align-items: center;display: flex;"
+                                mat-menu-item>
+                                <mat-icon style="font-size: 120%;
+                                align-content: center;
+                                display: flex;
+                                align-items: center;">delete</mat-icon>delete
+                            </button>
+                        </mat-menu>
+                    </div>
+                    <div class="im-wrapper" (click)="goToPlan(plan.id)">
+                        <img class="im" mat-card-image [src]="plan.cover" />
+                    </div>
+                </mat-card>
+            </div>
+            <!-- <mat-grid-tile>
+                <mat-card class="shadow-lg" style="width: 90%;height: 85%;background-color: #e1e1e1;">
+                    <button mat-icon-button style="width: 100%;height: 100%;">
+                        <mat-icon style="font-size: 100px;width: auto;height: 
+                            auto;color: white;">
+                            add
+                        </mat-icon>
+                    </button>
+                </mat-card>
+            </mat-grid-tile> -->
+        </div>
+    </div>
+
+    <div class="col-lg-4 side-item">
+        <div class="sidebar">
+            <div class="make-me-sticky">
+                <mat-card class="shadow-lg" style="border-radius: 10px">
+                    <mat-card-title style="display:flex;justify-content: center; width: 100%;">
+                        Top Planners
+                    </mat-card-title>
+                    <mat-card-content style="margin-top: 40px;">
+                        <div class="tp" *ngFor="let tp of topPlanners;">
+                            <app-top-planners style="width: 100%;" [username]="tp.username" [email]="tp.email"
+                                [profileImg]="tp.profile_img" [rate]="tp.average_rate" [isPublic]="tp.is_public"
+                                [userId]="tp.pk">
+                            </app-top-planners>
+                        </div>
+                        <div style="text-align: center;" class="tp" *ngIf="noPlannerEnable">
+                            No Planner to Follow
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+
+</div>

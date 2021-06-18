@@ -1,0 +1,155 @@
+<app-nav-bar></app-nav-bar>
+<div style="display:flex; justify-content: start;padding-top: 2%; margin-left: 1.5%;margin-right: 1.5%;">
+    <div style="width: 20% ;">
+        <mat-card *ngIf="(loginStatus$ | async)" class="shadow-lg" style="height: auto;border-radius: 10px">
+            <div routerLink="/homepage" class="underline">
+                <mat-icon style="margin-left: 10px;margin-top: 7px;">home</mat-icon>
+                <p style="margin-left: 10px;margin-top: 10px;">Home</p>
+            </div>
+            <hr class="hr">
+            <div (click)="goToProfile()" class="underline">
+                <mat-icon style="margin-left: 10px;margin-top: 7px;">person_outline</mat-icon>
+                <p style="margin-left: 10px;margin-top: 10px;">Profile</p>
+            </div>
+            <hr class="hr">
+            <div (click)="goToMyplan()" class="underline">
+                <mat-icon style="margin-left: 10px;margin-top: 7px;">date_range</mat-icon>
+                <p style="margin-left: 10px;margin-top: 10px;">My plans</p>
+            </div>
+        </mat-card>
+        <mat-card *ngIf="!(loginStatus$ | async)" class="shadow-lg" style="height: auto;border-radius: 10px">
+            <p style="padding-top: 3%;padding-right: 10%;padding-left: 10%;padding-bottom: 3%;"> you are not a member
+                yet? it's not late.</p>
+            <div>
+                <a mat-raised-button color="basic" routerLink="/login" routerLinkActive="active"
+                    style="width: 90%;margin: 5%;">Login</a>
+                <a mat-button mat-raised-button color="accent" routerLink="/register" routerLinkActive="active"
+                    style="width: 90%;margin: 5%;">Register</a>
+            </div>
+        </mat-card>
+    </div>
+
+    <div style="width: 55%;align-items: baseline;display: block;
+    margin-right: 3%;margin-left: 3%;">
+
+        <div style="width: 100%;justify-content: center;text-align: center;
+        font-size: 170%;
+        margin-bottom: 20px;
+        box-shadow: 0 1rem 3rem rgba(0,0,0,.10) !important;
+        border-radius: 10px;
+        padding: 3%;">
+            <p style="display: contents;">plan to <strong>{{cityName}}</strong></p>
+        </div>
+        <div class=shadow-lg style="width: 100%;align-items: baseline;display: flex;border-radius: 10px;padding: 10px;">
+            <ejs-tab id="element">
+                <e-tabitems>
+                    <e-tabitem>
+                        <ng-template #headerText>
+                            <div>Calender</div>
+
+                        </ng-template>
+                        <ng-template #content>
+                            <ejs-schedule style="overflow:auto" height=450 width=100% id='Schedule' #scheduleObj
+                                [currentView]="currentView" [selectedDate]="selectedDate"
+                                [eventSettings]="eventSettings" (dragStart)="onDragStart($event)"
+                                (resizeStart)="onResizeStart($event)">
+                                <e-views>
+                                    <e-view displayName='3 Days' option='Day' [interval]="dayInterval"></e-view>
+                                    <e-view displayName='Weeks' option='Week' [isSelected]="isSelected"
+                                        [interval]="weekInterval"></e-view>
+                                    <e-view displayName='2 Weeks' option='Week' [interval]="weeksInterval"></e-view>
+                                </e-views>
+                                <ng-template #editorTemplate let-data>
+                                    <table *ngIf="data != undefined" class="custom-event-editor" width="100%"
+                                        cellpadding="5">
+                                        <tbody>
+                                            <tr>
+                                                <td class="e-textlabel">Location</td>
+                                                <td colspan="4">
+                                                    <input id="Subject" class="e-field e-input" type="text"
+                                                        value="{{data.Subject}}" name="Subject" style="width: 100%" />
+                                                </td>
+                                            </tr>
+                                            <br />
+
+                                            <tr>
+                                                <td class="e-textlabel">From</td>
+                                                <td colspan="4">
+                                                    <ejs-datetimepicker id="StartTime" class="e-field"
+                                                        data-name="StartTime" format="M/dd/yy h:mm a"
+                                                        [value]="dateParser(data.startTime || data.StartTime)">
+                                                    </ejs-datetimepicker>
+                                                </td>
+                                            </tr>
+                                            <br />
+
+                                            <tr>
+                                                <td class="e-textlabel">To</td>
+                                                <td colspan="4">
+                                                    <ejs-datetimepicker id="EndTime" class="e-field" data-name="EndTime"
+                                                        format="M/dd/yy h:mm a"
+                                                        [value]='dateParser(data.endTime || data.EndTime)'>
+                                                    </ejs-datetimepicker>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="e-textlabel">Description</td>
+                                                <td colspan="4">
+                                                    <textarea id="Description" class="e-field e-input"
+                                                        name="Description" rows="3" cols="50"
+                                                        value="{{data.Description}}"
+                                                        style="width: 100%; height: 60px !important; resize: vertical"></textarea>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
+
+                                </ng-template>
+                            </ejs-schedule>
+                        </ng-template>
+                    </e-tabitem>
+                    <e-tabitem>
+                        <ng-template #headerText>
+                            <div> Map </div>
+                        </ng-template>
+                        <ng-template style="overflow: hidden;" #content>
+                            <app-map></app-map>
+                        </ng-template>
+                    </e-tabitem>
+                </e-tabitems>
+
+            </ejs-tab>
+        </div>
+    </div>
+    <div class="row-3" style="width: 30%;">
+        <mat-card class="shadow-lg " style="height: auto;border-radius: 10px ; padding: 5% 10% 5% 10%;">
+
+            <div style=" margin-bottom: 20px;">
+                <app-dynamic-search [cityId]="cityId" (locationEventEmmiter)="addToLocationList($event)">
+                </app-dynamic-search>
+            </div>
+
+            <div>
+
+                <ejs-grid matTooltip="drag items to calender" matTooltipPosition="above" id='Grid' class="grid" #gridObj [dataSource]='(gridItems$ | async)' [allowSelection]="true"
+                    [allowRowDragAndDrop]="true" [editSettings]='editSettings' [rowDropSettings]="srcDropOptions"
+                    (rowDrop)="onDragStop($event)" (rowDrag)="onRowDrag($event)">
+                    <e-columns>
+
+                        <e-column field='placeName' headerText='List of Places' width='70'></e-column>
+
+                    </e-columns>
+                </ejs-grid>
+            </div>
+        </mat-card>
+        <div style="width: 100%;display: flex;justify-content: center;">
+            <button *ngIf="!isOwn" class="save-button" mat-raised-button color="accent" (click)="openDialog()"> save
+            </button>
+            <button *ngIf="isOwn" class="save-button" mat-raised-button color="accent" (click)="openDialog()"> update
+            </button>
+        </div>
+    </div>
+</div>

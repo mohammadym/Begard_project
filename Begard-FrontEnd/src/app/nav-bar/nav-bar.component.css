@@ -1,0 +1,128 @@
+
+
+     .scrollbar-ripe-malinka::-webkit-scrollbar {
+        width: 6px;
+        background-color: #F5F5F5; }
+        
+        .scrollbar-ripe-malinka::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+        background-image: -webkit-linear-gradient(330deg, #bbdefb 0%, #0d47a1 100%);
+        background-image: linear-gradient(120deg, #bbdefb  0%, #0d47a1 100%); }
+  
+
+     .navbar{
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        background-color: #3f51b5 ;
+        padding: 1% 2.5%  !important;
+    }
+
+    .nav-hover:hover {
+        cursor: pointer;
+    }
+    .navbar { 
+        padding: 0 0 4.5rem;
+    }
+    
+    .navbar-brand {
+        font-family: 'Ubuntu';
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    
+    .nav-item-top {
+        padding-top: 10px;
+        padding-left: 15px;
+        padding-right: 0px;
+        padding-bottom: 0px;
+    }
+    .nav-item {
+       padding: 0 0 0 15px;
+    }
+    
+    .nav-link{
+        font-size: 1rem;
+        font-family: "Montserrat-Light", sans-serif;
+        float: right;
+    }
+   
+    
+    .box-shadow{
+        -webkit-box-shadow: 0px 1px 10px 0px rgba(0,0,0,0.5);
+        -moz-box-shadow: 0px 1px 10px 0px rgba(0,0,0,0.5);
+        box-shadow: 0px 1px 10px 0px rgba(0,0,0,0.5);
+      }
+
+    @media (min-width:992px)
+    {
+        .nav-item-costum {
+            display: none;
+            
+          }
+          .notific {
+              display: none;
+          }
+          .nav-item-top{
+              padding-top: 0px ;
+          }
+    }
+
+      /* pop up */
+      .popup {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      } 
+
+    .popup .popuptext {
+        visibility: hidden;
+        width: 345px;
+        background-color: white;
+        color: pink;
+        text-align: center;
+        border-radius: 10px;
+        padding: 0;
+        position: absolute;
+        z-index: 1;
+        margin-top: 15px;
+        right: -10px;
+        margin-left: -80px;
+      }
+
+      /* Popup arrow */
+.popup .popuptext::after {
+    content: "";
+    position: absolute;
+    bottom:100%;
+    left: 92.5%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent white transparent;
+  }
+  /* Toggle this class - hide and show the popup */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+  }
+
+  /* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+  }
+  
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+  }
+
+  .notific {
+      margin-right: 5px;
+  }

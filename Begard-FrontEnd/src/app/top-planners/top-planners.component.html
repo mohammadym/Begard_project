@@ -1,0 +1,36 @@
+<div style="display: block;margin: 10px;display: block;margin: 10px;">
+  <div style="display: flex;justify-content: center;">
+    <div style="display: flex;width: 65%;">
+      <span style="cursor:pointer" (click)="goToProfile(userId)"><img mat-card-avatar class="example-header-image"
+          [src]="profileImg"></span>
+      <div style="font-size: 18px;overflow: hidden;margin-top: 7px;">
+        <div class="name" matTooltip="{{email}}" matTooltipPosition="after"
+          style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;margin-left: 10px;"
+          (click)="goToProfile(userId)">{{email}}</div>
+        <div style="margin-left: 10px;margin-top: 3px;" matTooltip="{{rate}}" matTooltipPosition="before">
+          <mat-star-rating [startCount]="5" [rating]="rate">
+          </mat-star-rating>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="(authService.isLogedIn | async)"
+      style="display: flex;align-items: center;justify-content: center;width: 30%;">
+      <button *ngIf="allowFollowRequest" mat-raised-button class="follow" color="primary" (click)="onFollow()" style="width: 85%;
+      height: 70%;
+      justify-content: center;
+      display: flex;">
+        <mat-icon style="font-size: 14px; margin-top: 8px; margin-left: -6px;">person_add</mat-icon><span
+          style="font-size: 12px;" (click)="onFollow()">{{followButtonTitle}}</span>
+      </button>
+      <button *ngIf="!allowFollowRequest" mat-raised-button class="follow" color="basic" style="width: 85%;
+      height: 70%;
+      justify-content: center;
+      display: flex;">
+        <mat-icon style="font-size: 14px; margin-top: 8px; margin-left: -6px;">person</mat-icon><span
+          style="font-size: 12px;" (click)="onFollow()">{{followButtonTitle}}</span>
+      </button>
+    </div>
+  </div>
+  <hr class="hr">
+</div>

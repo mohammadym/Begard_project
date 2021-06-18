@@ -1,0 +1,73 @@
+<router-outlet></router-outlet>
+
+<div class="search-wrapper">
+
+  <div class="search-box" style="background: #fffffff9; padding: 40px 40px;">
+    <mat-card-header>
+      <mat-card-title style="line-height: 2rem; padding: 0;" >Choose Your Destination : </mat-card-title>
+    </mat-card-header>
+    <div class="row">
+      <div class="col-lg-3 col-md-4">
+        <mat-form-field class="example-quart-width">
+
+          <mat-select [formControl]="cityCtrl" (selectionChange)="onSelectionChanged()" placeholder="City" required
+            #citySelect>
+            <mat-option>
+              <ngx-mat-select-search [formControl]="cityFilterCtrl"></ngx-mat-select-search>
+            </mat-option>
+
+            <mat-option *ngFor="let city of filteredCities | async" [value]="city">
+              {{city.name}}
+            </mat-option>
+          </mat-select>
+
+          <mat-error *ngIf="cityCtrl.hasError('required')">
+            <strong>destination city</strong> is required
+          </mat-error>
+
+        </mat-form-field>
+
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <mat-form-field class="example-quart-width">
+          <mat-label>From </mat-label>
+          <input matInput disabled [formControl]="startDateControl" [min]="startDateMin" [matDatepicker]="startpicker"
+            (dateInput)="onStartDateChanged($event.value)" required #startDate>
+          <mat-datepicker-toggle matSuffix [for]="startpicker"></mat-datepicker-toggle>
+          <mat-datepicker touchUi #startpicker disabled="false"></mat-datepicker>
+
+          <mat-error *ngIf="startDateControl.hasError('required')">
+            <strong>start date</strong> is required
+          </mat-error>
+
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <mat-form-field  class="example-quart-width">
+          <mat-label>To</mat-label>
+          <input matInput disabled [formControl]="endDateControl" [min]="endDateMin" [matDatepicker]="endpicker"
+            (dateInput)="onEndDateChanged($event.value)" required #endDate>
+          <mat-datepicker-toggle matSuffix [for]="endpicker"></mat-datepicker-toggle>
+          <mat-datepicker touchUi #endpicker [disabled]="endDateDisable"></mat-datepicker>
+
+          <mat-error *ngIf="endDateControl.hasError('required')">
+            <strong>end date</strong> is required
+          </mat-error>
+
+        </mat-form-field>
+      </div>
+
+
+     <div class="col-lg-3">
+      <button mat-stroked-button color="primary" class="btn-block" type="submit" (click)="onSearch()"
+      [routerLink]="['/calender', cityCtrl.value?.id]" [disabled]="suggestButtonDisabled">
+      Suggest Plan</button>
+     </div>
+
+    </div>
+
+  </div>
+
+
+</div>

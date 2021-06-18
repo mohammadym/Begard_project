@@ -1,0 +1,32 @@
+.preview{
+    max-width: 500px;
+    min-width: 300px;
+    max-height: 300px;
+    min-height: 100px;
+}
+
+.description{
+    max-width: 500px;
+    min-width: 500px;
+    max-height: 300px;
+    min-height: 80px;
+    font-size: medium;
+}
+
+.content{
+    display: grid;
+}
+
+.input-file{
+    display: none;
+}
+
+.choose-button{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: medium;
+}
+
+.action-button{
+    font-size: medium;
+}

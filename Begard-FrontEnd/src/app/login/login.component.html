@@ -1,0 +1,88 @@
+<app-nav-bar></app-nav-bar>
+<div class="login-wrapper" style="padding: 7%;
+display: flex;
+height: auto;
+background: white !important;
+justify-content: center;">
+
+  <mat-card *ngIf="!isRegister" class="fadein" style="box-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important;border-radius: 10px;top: 0;
+  opacity: 1;
+  float: left;
+  padding: 30px 50px 30px 50px;
+  width: 100%;
+  background: #fff;
+  border-radius: 10px;
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  z-index: 5;
+  max-width: 330px;">
+    <mat-card-header>
+      <mat-card-title style="font-size: 30px;">Login</mat-card-title>
+    </mat-card-header>
+
+    <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)" style="padding-top: 20px;">
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Email" type="email" ngModel required email name="email">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Password" type="password" ngModel required minlength="8" name="password">
+        </mat-form-field>
+      </mat-card-content>
+
+      <mat-checkbox> Remember me!</mat-checkbox>
+      <button mat-stroked-button color="accent" class="btn-block" type="submit"
+        [disabled]="!loginForm.valid">Login</button>
+
+      <p style="width: 100%;
+      text-align: center;
+      padding-top: 10%;
+      font-size: 100%;">You have no account yet?! <a routerLink="/register">Register</a></p>
+    </form>
+  </mat-card>
+
+  <mat-card *ngIf="isRegister" class="fadein" style="box-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important;border-radius: 10px;top: 0;
+  opacity: 1;
+  float: left;
+  padding: 30px 50px 30px 50px;
+  width: 100%;
+  background: #fff;
+  border-radius: 10px;
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  z-index: 5;
+  max-width: 330px;">
+    <mat-card-header>
+      <mat-card-title  style="font-size: 30px;">Register</mat-card-title>
+    </mat-card-header>
+
+    <form #registerForm="ngForm" (ngSubmit)="onCreateUser(registerForm)" style="padding-top: 20px;">
+
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Email" type="email" required email ngModel name="email">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Password" type="password" required minlength="8" ngModel name="password1">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Confirm Password" type="password" required minlength="8" ngModel
+            name="password2">
+        </mat-form-field>
+      </mat-card-content>
+
+      <button [disabled]="!registerForm.valid" type="submit" mat-stroked-button color="accent"
+        class="btn-block">Register</button>
+      <p style="width: 100%;
+        text-align: center;
+        padding-top: 10%;
+        font-size: 100%;">You have an account? <a routerLink="/login">Login</a></p>
+    </form>
+  </mat-card>
+
+</div>

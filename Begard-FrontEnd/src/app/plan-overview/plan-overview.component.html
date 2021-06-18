@@ -1,0 +1,24 @@
+<mat-card class="plan-card">
+  <mat-card-header>
+    <img mat-card-avatar class="profile-image" [src]="plannerProfileCover" (click)="goToProfile()"
+      style="cursor: pointer;margin-right: -15px;">
+    <div style="display: block;overflow: hidden;width: 100%;">
+      <div (click)="goToProfile()"
+        style="cursor: pointer; margin-left: 1.5%;text-overflow: ellipsis;overflow: hidden;white-space: nowrap; font-size: 125%; margin-bottom: 2%;;"
+        matTooltip="{{plannerUsername}}" matTooltipPosition="before">
+        {{plannerUsername}}
+      </div>
+      <div style="display: flex;overflow: hidden;width: 100%;margin-bottom: 10px;">
+        <mat-icon style="min-width: 10px;" class="location-icon">location_on</mat-icon>
+        <span #city style=" align-self: center;width: 28%;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;"
+          matTooltip="{{planCity}}" matTooltipPosition="before" class="city">{{planCity}}</span>
+        <span class="date"
+          style="width: 60%;text-overflow: ellipsis;overflow: hidden;white-space: nowrap; text-align: end;align-self: center;"
+          matTooltip="{{planDateCreted}}" matTooltipPosition="after">At {{planDateCreted}}</span>
+      </div>
+    </div>
+  </mat-card-header>
+  <mat-card-content class="im-wrapper" (click)="goToPlan()" style="cursor: pointer;">
+    <img class="im" mat-card-image [src]="planCover" />
+  </mat-card-content>
+</mat-card>

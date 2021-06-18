@@ -1,0 +1,25 @@
+<div style="overflow: auto;">
+    <div style="text-align: center;margin-bottom: 20px;font-size: 140%;">
+        <strong>{{type}}</strong>
+    </div>
+    <hr class="hr">
+    <div *ngFor=" let user of users" style="display: block;margin-bottom: 20px;">
+        <div style="display: flex;">
+            <img mat-card-avatar src="{{env+user.profile_img}}" />
+            <div style="align-content: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: start;
+    overflow: hidden;
+    font-size: 120%;
+    cursor: pointer;
+    margin-left: 15px;" (click)="goToProfile(user.id)">
+                <p matTooltip="{{user.username}}" matTooltipPosition="above"
+                    style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">{{user.username}}</p>
+            </div>
+        </div>
+    </div>
+    <div style="text-align: center;font-size: 120%;" *ngIf="noFollower">
+        no users
+    </div>
+</div>

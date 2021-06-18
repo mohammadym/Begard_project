@@ -1,0 +1,10 @@
+
+  <mat-form-field class="search-box">
+    <input [formControl]="autoCompleteControl" type="text" placeholder="search a place" aria-label="Number" matInput
+      [matAutocomplete]="auto" >
+    <mat-autocomplete  #auto="matAutocomplete" (optionSelected)="onSelectionChanged($event)" [displayWith]="displayNull">
+      <mat-option *ngFor="let item of locationsAutoComplete$ | async; let index = index" [value]="item">
+        {{ item.name }}                                                                                                                                                                                                         
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>

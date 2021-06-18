@@ -1,0 +1,109 @@
+<router-outlet></router-outlet>
+<app-nav-bar style="position: fixed; width: 100%; z-index: 200;"></app-nav-bar>
+
+<div style="background-color: #f7f8fd;">
+
+
+    <div class="row" style="padding: 10% 5%; margin: 0;background-size: cover;"
+        [ngStyle]="{'background-image': 'url(' + baseurl +'/media/images/back.jpg' +')'}">
+        <!-- <img src="../../assets/trip.svg" style="position: absolute;right: 10%;top: 10%; width: 30%;"> -->
+        <app-search style="width:100%;margin-top: 40px; "></app-search>
+    </div>
+
+    <!-- <span (click)="openNav()" class="top-planners-toggle"> <i matTooltip="Top Planners" [matTooltipPosition]="'left'"
+            class="fas fa-chevron-circle-left fa-4x"></i></span>
+    <div id="mySidenav" class="sidenav shadow-lg scrollbar-ripe-malinka">
+        <a class="closebtn" (click)="closeNav()">&times;</a>
+        <mat-card class="shadow-lg" style="border-radius: 10px; margin: 0;">
+            <mat-card-title style="display:flex;justify-content: center; width: 100%;">
+                Top Planners
+            </mat-card-title>
+            <mat-card-content style="margin-top: 40px;">
+                <div *ngFor="let tp of topPlanners;">
+                    <app-top-planners style="width: 100%;" [username]="tp.username" [email]="tp.email"
+                        [profileImg]="tp.profile_img" [rate]="tp.average_rate" [isPublic]="tp.is_public"
+                        [userId]="tp.pk"></app-top-planners>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div> -->
+    <div class="row" style="margin:0; padding: auto 5%;">
+        <div class="col-lg-3 side-item ">
+            <div class="sidebar">
+                <div class="make-me-sticky">
+                    <mat-card *ngIf="(loginStatus$ | async)" class="shadow-lg "
+                        style="height: auto;border-radius: 10px;">
+
+                        <div class="underline">
+                            <mat-icon style="margin-left: 10px;margin-top: 7px;">home</mat-icon>
+                            <p style="margin-left: 10px;margin-top: 10px;">Home</p>
+                        </div>
+                        <hr class="hr">
+                        <div routerLink="{{'/'+userPro}}" class="underline">
+                            <mat-icon style="margin-left: 10px;margin-top: 7px;">person_outline</mat-icon>
+                            <p style="margin-left: 10px;margin-top: 10px;">Profile</p>
+                        </div>
+                        <hr class="hr">
+                        <div routerLink="/myplans" class="underline">
+                            <mat-icon style="margin-left: 10px;margin-top: 7px;">date_range</mat-icon>
+                            <p style="margin-left: 10px;margin-top: 10px;">My plans</p>
+                        </div>
+                    </mat-card>
+                    <mat-card *ngIf="!(loginStatus$ | async)" class="shadow-lg "
+                        style="height: auto;margin: 20px;border-radius: 10px">
+                        <p style="padding-top: 3%;padding-right: 10%;padding-left: 10%;padding-bottom: 3%;"> you are not
+                            a member
+                            yet? it's not late.</p>
+                        <div>
+                            <a mat-raised-button color="basic" routerLink="/login" routerLinkActive="active"
+                                style="width: 90%;margin: 5%;">Login</a>
+                            <a mat-button mat-raised-button color="accent" routerLink="/register"
+                                routerLinkActive="active" style="width: 90%;margin: 5%;">Register</a>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-5 content-item">
+            <div id="content">
+                <mat-card *ngIf="(loginStatus$ | async)" class="shadow-lg" style="border-radius: 10px">
+                    <app-post-location></app-post-location>
+                </mat-card>
+                <mat-card class="shadow-lg" style="border-radius: 10px;box-shadow: 0px 5px 13px #e6e6e6;">
+                    <mat-card-title style="display:flex;justify-content: center;">Top Plans</mat-card-title>
+                    <app-horizontl-list style="margin-top: 20px;" [planOverviews]="planOverviews"></app-horizontl-list>
+                </mat-card>
+                <div style="width: 100%;">
+                    <app-location-post [currentUrl]="currentUrl"></app-location-post>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 side-item">
+
+            <div class="sidebar">
+                <div class="make-me-sticky">
+                    <mat-card class="shadow-lg" style="border-radius: 10px">
+                        <mat-card-title style="display:flex;justify-content: center; width: 100%;">
+                            Top Planners
+                        </mat-card-title>
+                        <mat-card-content style="margin-top: 40px;">
+                            <div *ngFor="let tp of topPlanners;">
+                                <app-top-planners style="width: 100%;" [username]="tp.username" [email]="tp.email"
+                                    [profileImg]="tp.profile_img" [rate]="tp.average_rate" [isPublic]="tp.is_public"
+                                    [userId]="tp.pk"></app-top-planners>
+                            </div>
+                            <div style="text-align: center;" class="tp" *ngIf="noPlannerEnable">
+                                No Planner to Follow
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

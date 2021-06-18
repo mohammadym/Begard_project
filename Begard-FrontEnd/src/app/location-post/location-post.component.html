@@ -1,0 +1,103 @@
+<mat-card class="parent" *ngFor="let post of posts" class="example-card shadow-lg p-3 mb-5 bg-white ">
+
+    <mat-grid-list cols="11" rows="2" rowHeight="40px"
+        style="background: #3f51b5;border-top-left-radius: 10px;border-top-right-radius: 10px;">
+        <mat-grid-tile [colspan]=2 [rowspan]=2 style="border-top-left-radius: 10px;">
+            <img (click)="goToProfile(post.usrId)" matRipple routerLink="post." mat-card-avatar
+                src="{{post.userProImgSrc}}" class="example-header-image">
+        </mat-grid-tile>
+        <mat-grid-tile class="post-username" [colspan]=6 style="color: white;font-size: 20px;">
+            <div (click)="goToProfile(post.usrId)" class="usernamelink"><span
+                    class="post-username">{{post.userName}}</span></div>
+        </mat-grid-tile>
+        <mat-grid-tile class="post-follow" [colspan]=3 style="background: #3f51b5;border-top-right-radius: 10px;">
+            <button *ngIf="post.usrId != userId && (authService.isLogedIn | async)" (click)="onFollow(post)"
+                mat-stroked-button color="primary" style="transform: scale(0.75);background: white;">
+                <mat-icon *ngIf="post.followingState=='Follow'">person_add </mat-icon>
+                <mat-icon *ngIf="post.followingState!='Follow'">person</mat-icon>
+                {{post.followingState}}
+            </button>
+        </mat-grid-tile>
+        <mat-grid-tile class="post-city" [colspan]=6 style="color: white;">
+            <p>in <b class="trip">Trip</b> to {{post.city}}</p>
+        </mat-grid-tile>
+        <mat-grid-tile *ngIf="post.placeName!=null" class="post-place" [colspan]=3
+            style="color: white;text-overflow: ellipsis;">
+            <mat-icon style="transform: scale(0.75);margin-top: -4px;">place</mat-icon><span
+                matTooltip="{{post.placeName}}" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">
+                {{post.placeName}}</span>
+        </mat-grid-tile>
+
+    </mat-grid-list>
+
+    <div style="padding: 5%;">
+        <mat-card-content>
+            <p style="padding: 1%;
+            font-size: 120%;
+            line-height: 120%;
+            text-align: justify;">
+                {{post.description}}
+            </p>
+        </mat-card-content>
+
+        <app-location-carousel [imgSrc]="post.imgSrc"></app-location-carousel>
+
+        <div>
+            <div style="margin-top: 5%;
+            justify-content: center;
+            display: flex;">
+                <div style="display: block;">
+                    <a (click)="onAbleComment(post)" class="comment far fa-comment"
+                        style="color: #616161;color: #616161;
+                        height: 40px;
+                        width: 40px;
+                        justify-content: center;
+                        display: flex;
+                        align-items: center;
+                        font-size: 180%;;">
+                    </a>
+                    <div style="margin-top: 10%;
+                    justify-content: center;
+                    display: flex;
+                    font-size: 130%;">
+                        <div>{{post.commentNums}}</div>
+                    </div>
+                </div>
+                <div style="display: block;">
+                    <a (click)='onLike(post)' mat-icon-button *ngIf="!post.isLiked">
+                        <mdb-icon far icon="heart" style="color: #616161;font-size: 180%;"></mdb-icon>
+                    </a>
+                    <a (click)='onDislike(post)' mat-icon-button color="warn"  *ngIf="post.isLiked">
+                        <mdb-icon fas icon="heart" color="red" style="font-size: 180%;"></mdb-icon>
+                    </a>
+                    <div style="margin-top: 10%;
+                    justify-content: center;
+                    display: flex;
+                    font-size: 130%;">
+                        <div>{{post.likeNums}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="!post.disable">
+
+            <div style="width: 100%;display: flex;" *ngIf="(authService.isLogedIn | async)">
+                <mat-form-field class="example-full-width" style="width: 100%;">
+                    <mat-label>Leave a comment</mat-label>
+                    <textarea [formControl]="commentFc" matInput placeholder="It makes me feel..."></textarea>
+                </mat-form-field>
+                <div style="display:flex; justify-content: center;display: flex;
+                justify-content: center;
+                width: 10%;
+                align-items: end;
+                padding-bottom: 2%;width: 10%;">
+                    <button (click)="onComment(post)" mat-icon-button>
+                        <mat-icon>send</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <app-comment *ngIf="!post.disable" [postId]="post.id"></app-comment>
+    </div>
+</mat-card>

@@ -1,0 +1,73 @@
+<div class="example-card">
+	<div class="user-wrap" style="display:flex;">
+		<div style="width:70%;display:flex;;overflow: hidden">
+			<img style="cursor: pointer;" mat-card-avatar class="example-header-image" [src]="profileImage" />
+			<div class="name" matTooltip="{{username}}" matTooltipPosition="after"
+				style="display: flex;align-items: center;margin-left:15px;margin-right:10px;font-size:20px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap">
+				{{username}}</div>
+		</div>
+		<div style="float:right;width:30%;justify-content:end;display: flex;">
+			<mat-form-field style="width:45%;float:right">
+				<mat-label>plan</mat-label>
+				<mat-select [formControl]="planControl" style="font-size: 17px;"
+					(selectionChange)="onPlanChange($event.value)">
+					<mat-option *ngFor="let p of plans" [value]="p">
+						{{p.destination_city_name}}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+			<mat-form-field style="width:45%;height:10px;margin-left:5px;margin-right:10%;float:right">
+				<mat-label>location</mat-label>
+				<mat-select [formControl]="locationControl" style="font-size: 17px;"
+					(selectionChange)="onLocationChange($event.value)" [disabled]="locationDisabled">
+					<mat-option *ngFor="let l of locations" [value]="l">
+						{{l.place_name}}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+
+		</div>
+	</div>
+
+	<div style="display:flex;margin-top: 15px;white-space: nowrap; overflow-x: auto;">
+		<div *ngFor="let img of images;let indx = index" style="display:inline-flex;margin:0px">
+			<div style="margin:5px">
+				<img [src]="img" style="width:150px ; height: 150px;border-radius: 5px;
+				box-shadow: 2px 2px 5px #717171;margin-top: 10px;margin-bottom: 10px;margin-right: 5px;">
+				<button mat-icon-button color="primary" style="position: relative;
+				z-index: 40;
+				top: 30px;
+				left: -35px;
+				color: white;
+				width: auto;
+				height: auto;" (click)="clearPhoto(indx)">
+					<mat-icon style="font-size: 20px;
+					margin-top: 11px;
+					position: absolute;
+					background-color: #00000069;
+					border-radius: 50px;">clear</mat-icon>
+				</button>
+			</div>
+		</div>
+		<input class="input-file" #file type="file" accept='image/*' (change)="preview(file.files)" />
+		<button mat-mini-fab (click)="file.click()" color="accent" style="margin-left: 5px;margin-top: 5px;
+		box-shadow: 2px 2px 2px #acacac !important;margin-bottom: 5px;">
+			<mat-icon>image</mat-icon>
+		</button>
+	</div>
+
+	<form class="example-form">
+		<mat-form-field class="example-full-width">
+			<mat-label>write a caption</mat-label>
+			<textarea matInput [formControl]="descControl" (input)="updatePostButtonDisabled()"
+				style="font-size: 20px;"></textarea>
+		</mat-form-field>
+	</form>
+
+
+	<mat-card-actions align="end">
+		<button mat-raised-button color='primary' (click)="post()" [disabled]="postDisabled"
+			style="margin-top:10px; min-width: 100px; margin-right: 8px;margin-bottom: -23px;font-size: 17px;">post</button>
+	</mat-card-actions>
+
+</div>

@@ -1,0 +1,8 @@
+<div style="display: flex;">
+    <div style="width:13%; display: contents;"  *ngFor="let ratingId of ratingArr;index as i" [id]="'star_'+i"
+        (click)="onClick(i+1)">
+        <mat-icon [color]="color" style="font-size: 15px;display: contents;">
+            {{showIcon(i)}}
+        </mat-icon>
+    </div>
+</div>

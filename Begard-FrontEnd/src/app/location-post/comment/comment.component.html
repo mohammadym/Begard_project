@@ -1,0 +1,29 @@
+<!--  -->
+
+<!-- Grid row -->
+<div class="row " >
+
+    <!-- Grid column -->
+    <div style="width: 98%; font-size: smaller;">
+  
+      <!-- Exaple 1 -->
+      <div *ngIf="comments.length>0" class="card example-1 scrollbar-ripe-malinka shadow-none" >
+        <mat-card  *ngFor="let comment of comments" class="comment" >
+            <div style="display: flex;">
+              <img routerLink="{{'/profile/'+ comment.user}}"  matRipple mat-card-avatar src="{{baseUrl+comment.user_profile_img}}" class="example-header-image">
+              <div class="username" routerLink="{{'/profile/'+ comment.user}}" style="margin-left: 10px;margin-top: 10px;font-size: 120%;"><b>{{comment.user_name}}</b> says :</div>
+            </div>
+            <mat-card-content style="margin-left: 50px;">{{comment.content}}</mat-card-content>
+            
+        </mat-card>
+        
+      </div>
+      <!-- Exaple 1 -->
+  
+    </div>
+    <!-- Grid column -->
+  
+   
+  
+  </div>
+  <!-- Grid row -->

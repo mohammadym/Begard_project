@@ -1,0 +1,107 @@
+.example-card {
+  box-shadow: 10px 10px 50px #888888;
+  border-radius: 10px;
+  padding: 0px !important;
+  position: relative;
+}
+
+.example-header-image {
+  background-size: cover;
+  transform: scale(1.5);
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.example-ripple-container {
+  cursor: pointer;
+  text-align: center;
+  border-radius: 2%;
+}
+
+.example-form {
+  min-width: 150px;
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+}
+
+.example-full-width {
+  width: 70%;
+}
+
+.trip {
+  color: rgb(204, 204, 204);
+}
+
+.trip:hover {
+  cursor: pointer;
+  color: #7986cb;
+}
+
+.usernamelink:hover {
+  cursor: pointer;
+  color: #c5cae9;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.usernamelink:hover {
+  cursor: pointer;
+  color: #c5cae9;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.comment:hover {
+  cursor: pointer;
+}
+
+.post-username {
+  overflow: hidden;
+}
+
+.user-content {
+  display: none;
+  position: absolute;
+  width: 100px;
+  height: auto;
+  top: 10%;
+  left: 85%;
+  background-color: rgb(250, 250, 250);
+  padding: 5px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  border-radius: 2px 6px 6px 6px;
+  font-size: 12px;
+  z-index: 30;
+}
+
+.post-username:hover+.user-content {
+  display: block;
+}
+
+.post-place {
+  overflow: hidden
+}
+
+.place-content {
+  display: none;
+  position: absolute;
+  width: 100px;
+  height: auto;
+  top: 90%;
+  left: 85%;
+  background-color: rgb(250, 250, 250);
+  padding: 5px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  border-radius: 2px 6px 6px 6px;
+  font-size: 12px;
+  z-index: 30;
+}
+
+.post-place:hover+.place-content {
+  display: block;
+}

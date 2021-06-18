@@ -1,0 +1,11 @@
+.search-box{
+    opacity: 1;
+    padding: 10px 10px 0px 10px;
+    width: 100%;
+    background: rgb(256,256, 256);
+    border-radius: 1px;
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    z-index: 5;
+  }

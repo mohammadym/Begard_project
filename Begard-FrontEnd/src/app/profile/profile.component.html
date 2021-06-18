@@ -1,0 +1,312 @@
+
+<app-nav-bar style="position: fixed; width: 100%; z-index: 200;top:0;"></app-nav-bar>
+<div style="background-color: #f7f8fd;">
+    <div class="row" style="padding: 15% 5%; margin: 0;background-size: cover;"
+    [ngStyle]="{'background-image': 'url(' + baseurl +'/media/images/back.jpg' +')'}">
+    <!-- <img src="../../assets/trip.svg" style="position: absolute;right: 10%;top: 10%; width: 30%;"> -->
+    </div>
+    <div style="display: flex; justify-content: center;">
+        <mat-card class="pro-info shadow-lg">
+            
+                <div class="row" style="margin: 0;padding: 0 2%;">
+                    <div class="col-lg-2" style="text-align: center;height: 120px;">
+                        <img mat-card-avatar class="shadow-lg" style="transform: scale(4);margin-top: 40px;"
+                            src='{{imgUrl}}'>
+                    </div>
+                    <div class="col-lg-6 " style="padding-left: 30px;">
+                        <div class="row user-name" style="height: 70px;">
+                            <h1 style="font-size: 2rem;padding-left: 3%;"  class="header user-font">{{userName}}</h1>
+                        </div>
+                        <div class="row header-down">
+                            <div class="col-lg-2 col-4 post-items posts" style="cursor: text;padding-left:0;">
+                                <h2 style="text-align: center;margin-bottom: 0px;" class="smaller">Posts</h2>
+                                <h3 class="post-items-num smaller" style="font-size: 1.2rem;text-align: center;">{{postNum}}</h3>
+                            </div>
+                            <div (click)="showFollowers()" class="col-lg-2 col-4 post-items followers"
+                                style="padding-left:0;">
+                                <h2 style="text-align: center;margin-bottom: 0px;" class="smaller">Followers</h2>
+                                <h3 class="post-items-num smaller" style="font-size: 1.2rem;text-align: center;">{{follwersNum}}</h3>
+                            </div>
+                            <div (click)="showFollowings()" class="col-lg-2 col-4 post-items followings"
+                                style="padding-left: 0;margin-left: 30px;">
+                                <h2 style="text-align: center;margin-bottom: 0px;" class="smaller">Followings</h2>
+                                <h3 class="post-items-num smaller" style="font-size: 1.2rem;text-align: center;">{{follwingsNum}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-2 last-col">
+                        <button class="follow-btn"
+                            *ngIf="!isOwnPro && allowFollowRequest && (authService.isLogedIn | async)"
+                            (click)="onFollow()" style="margin-top: -7%;right: 5%;position: absolute;" mat-raised-button
+                            color="primary">
+                            <mat-icon *ngIf="followingState=='Follow'">person_add</mat-icon>
+                            <mat-icon *ngIf="followingState!='Follow'">person</mat-icon>
+                            {{followingState}}
+                        </button>
+                        <button class="follow-btn"
+                            *ngIf="!isOwnPro && !allowFollowRequest && (authService.isLogedIn | async)"
+                            (click)="onFollow()" style="margin-top: -7%;right: 5%;position: absolute;" mat-raised-button color="basic"
+                            (click)="openDialog()">
+                            <mat-icon *ngIf="followingState=='Follow'">person_add</mat-icon>
+                            <mat-icon *ngIf="followingState!='Follow'">person</mat-icon>
+                            {{followingState}}
+                        </button>
+
+                    </div>
+
+                </div>
+
+            <!-- <mat-grid-list class="gird-list" cols="6" rowHeight="50%">
+                <mat-grid-tile [colspan]="1" [rowspan]="2">
+                    <img mat-card-avatar style="margin-left: 10%;transform: scale(4);" src='{{imgUrl}}'>
+                </mat-grid-tile>
+                <mat-grid-tile class="username" style="font-size: 30px;margin-left: 3%;" [colspan]="3" [rowspan]="1">
+                    {{userName}}
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1">
+                    <button *ngIf="!isOwnPro && allowFollowRequest && (authService.isLogedIn | async)"
+                        (click)="onFollow()" style="margin-left: 50%;" mat-raised-button color="primary">
+                        <mat-icon *ngIf="followingState=='Follow'">person_add</mat-icon>
+                        <mat-icon *ngIf="followingState!='Follow'">person</mat-icon>
+                        {{followingState}}
+                    </button>
+                    <button *ngIf="!isOwnPro && !allowFollowRequest && (authService.isLogedIn | async)"
+                        (click)="onFollow()" style="margin-left: 50%;" mat-raised-button color="basic"
+                        (click)="openDialog()">
+                        <mat-icon *ngIf="followingState=='Follow'">person_add</mat-icon>
+                        <mat-icon *ngIf="followingState!='Follow'">person</mat-icon>
+                        {{followingState}}
+                    </button>
+                </mat-grid-tile>
+                <mat-grid-tile class="username" [colspan]="1" [rowspan]="1">
+                    <div style="margin-left: 20%;"> <b>
+                            <div style="font-size: 20px;">Posts</div>
+                            <div style="margin-top: 5px;">{{postNum}}</div>
+                        </b> </div>
+                </mat-grid-tile>
+                <mat-grid-tile class="username" style="margin-left: -4%;" [colspan]="1" [rowspan]="1"><b>
+                        <div style="font-size: 20px;">Followers</div>
+                        <div (click)="showFollowers()" class="number">{{follwersNum}}</div>
+                    </b></mat-grid-tile>
+                <mat-grid-tile class="username" style="margin-left: -10%;" [colspan]="1" [rowspan]="1"><b>
+                        <div style="font-size: 20px;">Followings</div>
+                        <div (click)="showFollowings()" class="number">{{follwingsNum}}</div>
+                    </b></mat-grid-tile>
+
+
+            </mat-grid-list> -->
+        </mat-card>
+
+    </div>
+
+    <div class="row" style="margin:0; padding: auto 5%;">
+        <div class="col-lg-3 side-item ">
+            <div class="sidebar">
+                <div class="make-me-sticky">
+                    <mat-card class="shadow-lg " style="height: auto;border-radius: 10px;">
+
+                        <div routerLink="/homepage" class="underline">
+                            <mat-icon style="margin-left: 10px;margin-top: 7px;">home</mat-icon>
+                            <p style="margin-left: 10px;margin-top: 10px;">Home</p>
+                        </div>
+                        <hr class="hr">
+                        <div (click)="goToProfile()" class="underline">
+                            <mat-icon style="margin-left: 10px;margin-top: 7px;">person_outline</mat-icon>
+                            <p style="margin-left: 10px;margin-top: 10px;">Profile</p>
+                        </div>
+                        <hr class="hr">
+                        <div routerLink="/myplans" class="underline">
+                            <mat-icon style="margin-left: 10px;margin-top: 7px;">date_range</mat-icon>
+                            <p style="margin-left: 10px;margin-top: 10px;">My plans</p>
+                        </div>
+
+
+                    </mat-card>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-5 content-item">
+            <mat-tab-group class="center-bar" *ngIf="!isOwnPro" mat-align-tabs="center" style="margin-right: -3%;">
+                <mat-tab label="Posts">
+                    <div style="display:flex; justify-content: center; ">
+                        <div style="width: 100%; margin: 20px">
+                            <app-location-post [currentUrl]="id"></app-location-post>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Plans">
+                    <div style="display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    grid-template-rows: 1fr;
+                    padding-bottom: 5%;
+                    padding-left: 3%;
+                    padding-right: 3%;
+                    padding-top: 3%;
+                    overflow: hidden;
+                    grid-gap: 5%;">
+                        <div class="item" *ngFor="let plan of plans">
+                            <mat-card class="shadow-lg"
+                                style="width: 100%;height: 100%;padding: 4%; cursor: pointer;border-radius: 10px;">
+                                <div style="display: flex;overflow: hidden;width: 96%;margin-bottom: 3%;">
+                                    <mat-icon (click)="goToPlan(plan.id)" style="min-width: 10px;margin: auto;"
+                                        class="location-icon">location_on</mat-icon>
+                                    <span (click)="goToPlan(plan.id)" #city
+                                        style=" align-self: center;width: 38%;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;"
+                                        matTooltip="{{plan.destination_city}}" matTooltipPosition="above"
+                                        class="city">{{plan.destination_city_name}}</span>
+                                    <span (click)="goToPlan(plan.id)" class="date"
+                                        style="width: 50%;text-overflow: ellipsis;overflow: hidden;white-space: nowrap; text-align: end;align-self: center;"
+                                        matTooltip="{{plan.creation_date}}" matTooltipPosition="above">At
+                                        {{plan.creation_date}}</span>
+                                </div>
+                                <div (click)="goToPlan(plan.id)" class="im-wrapper">
+                                    <img class="im" mat-card-image [src]="plan.cover" />
+                                </div>
+                            </mat-card>
+                        </div>
+                    </div>
+                </mat-tab>
+
+            </mat-tab-group>
+            <div *ngIf="isOwnPro" class="center-bar" style="display:flex; justify-content: center;margin-right: -3%; ">
+                <div style="width: 100%; margin: 20px">
+                    <app-location-post [currentUrl]="id"></app-location-post>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 side-item">
+
+            <div class="sidebar">
+                <div class="make-me-sticky">
+                    <mat-card class="shadow-lg" style="border-radius: 10px">
+                        <mat-card-title style="display:flex;justify-content: center; width: 100%;">
+                            Top Planners
+                        </mat-card-title>
+                        <mat-card-content style="margin-top: 40px;">
+                            <div *ngFor="let tp of topPlanners;">
+                                <app-top-planners style="width: 100%;" [username]="tp.username" [email]="tp.email"
+                                    [profileImg]="tp.profile_img" [rate]="tp.average_rate" [isPublic]="tp.is_public"
+                                    [userId]="tp.pk"></app-top-planners>
+                            </div>
+                            <div style="text-align: center;" class="tp" *ngIf="noPlannerEnable">
+                                No Planner to Follow
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+    <!-- 
+    <div style="display:flex">
+        <div id="leftbar">
+
+            <mat-card *ngIf="(authService.isLogedIn | async)" class="shadow-lg"
+                style="height: auto;margin: 20px;;border-radius: 10px">
+                <div routerLink="/homepage" class="underline">
+                    <mat-icon style="margin-left: 10px;margin-top: 7px;">home</mat-icon>
+                    <p style="margin-left: 10px;margin-top: 10px;">Home</p>
+                </div>
+                <hr class="hr">
+                <div (click)="refresh()" class="underline">
+                    <mat-icon style="margin-left: 10px;margin-top: 7px;">person_outline</mat-icon>
+                    <p style="margin-left: 10px;margin-top: 10px;">Profile</p>
+                </div>
+                <hr class="hr">
+                <div (click)="goToMyplan()" class="underline">
+                    <mat-icon style="margin-left: 10px;margin-top: 7px;">date_range</mat-icon>
+                    <p style="margin-left: 10px;margin-top: 10px;">My plans</p>
+                </div>
+            </mat-card>
+            <mat-card *ngIf="!(authService.isLogedIn | async)" class="shadow-lg"
+                style="height: auto;margin: 20px;border-radius: 10px">
+                <p style="padding-top: 3%;padding-right: 10%;padding-left: 10%;padding-bottom: 3%;"> you are not a
+                    member
+                    yet? it's not late.</p>
+                <div>
+                    <a mat-raised-button color="basic" routerLink="/login" routerLinkActive="active"
+                        style="width: 90%;margin: 5%;">Login</a>
+                    <a mat-button mat-raised-button color="accent" routerLink="/register" routerLinkActive="active"
+                        style="width: 90%;margin: 5%;">Register</a>
+                </div>
+            </mat-card>
+        </div>
+
+        <div id="content">
+            <mat-tab-group *ngIf="!isOwnPro" mat-align-tabs="center">
+                <mat-tab label="Posts">
+                    <div style="display:flex; justify-content: center; ">
+                        <div style="width: 100%; margin: 20px">
+                            <app-location-post [currentUrl]="id"></app-location-post>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Plans">
+                    <div style="display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    grid-template-rows: 1fr;
+                    padding-bottom: 5%;
+                    padding-left: 3%;
+                    padding-right: 3%;
+                    padding-top: 3%;
+                    overflow: hidden;
+                    grid-gap: 5%;">
+                        <div class="item" *ngFor="let plan of plans">
+                            <mat-card
+                                class="shadow-lg"
+                                style="width: 100%;height: 100%;padding: 4%; cursor: pointer;border-radius: 10px;">
+                                <div style="display: flex;overflow: hidden;width: 96%;margin-bottom: 3%;">
+                                    <mat-icon (click)="goToPlan(plan.id)" style="min-width: 10px;margin: auto;"
+                                        class="location-icon">location_on</mat-icon>
+                                    <span (click)="goToPlan(plan.id)" #city
+                                        style=" align-self: center;width: 38%;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;"
+                                        matTooltip="{{plan.destination_city}}" matTooltipPosition="above"
+                                        class="city">{{plan.destination_city_name}}</span>
+                                    <span (click)="goToPlan(plan.id)" class="date"
+                                        style="width: 50%;text-overflow: ellipsis;overflow: hidden;white-space: nowrap; text-align: end;align-self: center;"
+                                        matTooltip="{{plan.creation_date}}" matTooltipPosition="above">At
+                                        {{plan.creation_date}}</span>
+                                </div>
+                                <div class="im-wrapper">
+                                    <img class="im" mat-card-image [src]="plan.cover" />
+                                </div>
+                            </mat-card>
+                        </div>
+                    </div>
+                </mat-tab>
+
+            </mat-tab-group>
+            <div *ngIf="isOwnPro" style="display:flex; justify-content: center; ">
+                <div style="width: 100%; margin: 20px">
+                    <app-location-post [currentUrl]="id"></app-location-post>
+                </div>
+            </div>
+        </div>
+
+        <div id="rightbar">
+            <mat-card class="shadow-lg" style="margin: 20px;;border-radius: 10px">
+                <mat-card-title style="display:flex;justify-content: center; width: 100%;">
+                    Top Planners
+                </mat-card-title>
+                <mat-card-content style="margin-top: 40px;">
+                    <div class="tp" *ngFor="let tp of topPlanners;">
+                        <app-top-planners style="width: 100%;" [username]="tp.username" [email]="tp.email"
+                            [profileImg]="tp.profile_img" [rate]="tp.average_rate" [isPublic]="tp.is_public"
+                            [userId]="tp.pk"></app-top-planners>
+                    </div>
+                    <div style="text-align: center;" class="tp" *ngIf="noPlannerEnable">
+                        No Planner to Follow
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>-->
+</div>

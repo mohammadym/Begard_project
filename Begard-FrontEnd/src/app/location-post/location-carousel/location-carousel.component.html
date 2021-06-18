@@ -1,0 +1,8 @@
+
+<mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
+    <mdb-carousel-item style="max-height: auto;border-radius: 10px;" *ngFor="let item of imgUrl">
+      <div style="border-radius: 10px;" class="im-wrapper">
+        <img  class="im" src="{{item}}" alt="First slide">
+      </div>
+    </mdb-carousel-item>
+  </mdb-carousel>

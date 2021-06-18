@@ -1,0 +1,140 @@
+<div class="body">
+    <nav *ngIf="(loginStatus$ | async)" id="navbar" #navbar class="navbar navbar-expand-lg sticky-top  navbar-dark box-shadow">
+        <a class="navbar-brand" id="logo" href="">
+            <img style="width: 40px;
+            margin: -10px;
+            padding-bottom: 4px;" src="{{url+'/media/images/bgrd.jpg'}}"> 
+            Begard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <ul  class="navbar-nav ml-auto">
+
+
+                <li *ngIf="(loginStatus$ | async)" class="nav-item-top " [matMenuTriggerFor]="accountOptions">
+                    <a class="nav-link nav-hover ">
+                        <a *ngIf="(userEmail$ | async) as userEmail" style="color: white;" >{{userEmail}}
+                        </a>
+                        <i  style="font-size: 20px;color: white;" class="fas fa-user"></i>
+                        <mat-menu #accountOptions>
+                            <button mat-menu-item routerLink="/homepage" routerLinkActive="active" (click)="logout()"
+                                class="logout"><mat-icon class="logout-icon">exit_to_app</mat-icon>Logout</button>
+                        </mat-menu>
+                    </a>
+                </li>
+
+                <li *ngIf="(loginStatus$ | async)" class="nav-item">
+                    <a class="nav-link nav-hover" (click)=" openDialog($event)">
+                        <a style="color: white;" class="notific">Notification</a>
+                        <i  *ngIf="notfiNums>0" class="fas fa-bell fa" style="font-size: 20px;color: white;" matBadge="{{notfiNums}}"
+                            matBadgeColor="accent" matBadgeSize="small"></i>
+                        <i *ngIf="notfiNums===0" class="fas fa-bell fa" style="color: white;font-size: 20px;"></i>
+                        <div class="popup">
+                            <span class="popuptext" id="myPopup">
+                                <mat-card class="scrollbar-ripe-malinka"
+                                    style="width: 100%;max-height: 400px;overflow-y: auto;">
+                                    <h1 style="display: flex;justify-content: center;">Notifications</h1>
+                                    <hr>
+                                    <div *ngFor="let item of items">
+                                        <div class="row" style="padding: 0 15px;margin-bottom: 6%;">
+                                            <img mat-card-avatar
+                                                style="transform: scale(1.2);cursor: pointer;float: left;margin-left: 5px;"
+                                                src='{{item.proImg}}'>
+                                            <p matTooltip="{{item.userName}}" [matTooltipPosition]="'above'" style=" white-space: nowrap;
+                                                    margin-top: 10px;
+                                                    width: 45%;
+                                                    overflow: hidden;
+                                                    text-overflow: ellipsis;
+                                                    cursor: pointer;
+                                                    margin-left: 5%;
+                                                    text-align: left;">
+                                                {{item.userName}}
+                                            </p>
+                                            <div style="float: right;">
+                                                <button (click)="onAccept(item)"
+                                                    style="border-radius: 5px;margin-left: 10px;" mat-icon-button
+                                                    color="primary">accept</button>
+                                                <button (click)="onDecline(item)"
+                                                    style="border-radius: 5px;margin-left: 10px;" mat-icon-button
+                                                    color="accent">decline</button>
+                                            </div>
+                                        </div>
+                                        <!-- <div>
+                                            <mat-grid-list cols="9" rows="2" rowHeight="30px"
+                                                style="margin-left: -10px;margin-right: -10px;">
+                                                <mat-grid-tile routerLink="{{'/profile/'+item.userId}}" [colspan]="2"
+                                                    [rowspan]="2">
+                                                    <img mat-card-avatar style="transform: scale(1.5);cursor: pointer;"
+                                                        src='{{item.proImg}}'>
+                                                </mat-grid-tile>
+                                                <mat-grid-tile routerLink="{{'/profile/'+item.userId}}" class="username"
+                                                    [colspan]="5" [rowspan]="2">
+                                                    <div matTooltip="{{item.userName}}" [matTooltipPosition]="'above'"
+                                                        style=" white-space: nowrap;  
+                                                            overflow: hidden;
+                                                            text-overflow: ellipsis;
+                                                            cursor: pointer; ">
+                                                        {{item.userName}}
+                                                    </div>
+                                                </mat-grid-tile>
+                                                <mat-grid-tile class="req-icons" [colspan]="2" [rowspan]="1">
+                                                    <div style="display: block;">
+                                                        <button (click)="onAccept(item)"
+                                                            style="transform: scale(0.80);border-radius: 5px;"
+                                                            mat-raised-button color="primary">accept</button>
+                                                    </div>
+                                                </mat-grid-tile>
+                                                <mat-grid-tile [colspan]="2" [rowspan]="1">
+                                                    <div style="display: block;">
+                                                        <button (click)="onDecline(item)"
+                                                            style="transform: scale(0.80);border-radius: 5px;"
+                                                            mat-raised-button color="accent">decline</button>
+                                                    </div>
+                                                </mat-grid-tile>
+                                            </mat-grid-list>
+                                            <hr>
+                                        </div> -->
+                                    </div>
+                                </mat-card>
+                            </span>
+                        </div>
+                    </a>
+                </li>
+
+                <li  class="nav-item nav-item-costum">
+                    <a style="color: white;" routerLink="/homepage" class="nav-link nav-hover ">Home <i style="font-size: 20px;"
+                            class="fas fa-home"></i></a>
+                </li>
+                <li class="nav-item nav-item-costum">
+                    <a style="color: white;" routerLink="{{'/'+userPro}}" class="nav-link nav-hover">Profile <i style="font-size: 20px;"
+                            class="fas fa-user-circle"></i></a>
+                </li>
+                <li class="nav-item nav-item-costum">
+                    <a style="color: white;" routerLink="/myplans" class="nav-link nav-hover">My Plans <i style="font-size: 20px;"
+                            class="fas fa-calendar-alt"></i></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <nav *ngIf="!(loginStatus$ | async)" id="navbar" #navbar class="navbar navbar-expand sticky-top  navbar-dark box-shadow">
+        <a class="navbar-brand" id="logo" href="">
+            <!-- <img class="logo" style="width: 10%;" src="{{url+'/media/images/begrd_icon.svg'}}">  -->
+            Begard</a>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <ul class="navbar-nav ml-auto">
+
+                <li  class="nav-item-top">
+                    <a class="nav-link nav-hover " mat-raised-button
+                        style="color: black;background-color: white; margin-left: 10px;" routerLink="/login"
+                        routerLinkActive="active">Login</a>
+                    <a class="nav-link nav-hover " mat-button mat-raised-button color="accent" style="color: white;"
+                        routerLink="/register" routerLinkActive="active">Register</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+</div>
